@@ -18,9 +18,20 @@ $(document).ready(function () {
         getElements(response);
       }
     };
-
     request.open('GET', url1, true);
     request.send();
+
+    let request3 = new XMLHttpRequest();
+    const url3 = `https://api.openweathermap.org/data/2.5/forecast/?q=${city},${state}&appid=${process.env.API_KEY}`;
+    request3.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        const response3 = JSON.parse(this.responseText);
+        console.log(response3);
+        getForecast(response3);
+      }
+    };
+    request3.open('GET', url3, true);
+    request3.send();
 
     function getElements(response) {
       $('.showHumidity').text(
@@ -33,6 +44,12 @@ $(document).ready(function () {
         `the cloudiness in ${city} is  ${response.clouds.all}%`
       );
     }
+    function getForecast(response3) {
+      // const url3 = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}, ${state}&appid=${process.env.API_KEY}&units=imperial`;
+      $('.showForecast').text(
+        `The 8 day forecast in ${city} is ${response3.list[0].main.temp}`
+      );
+    }
   });
 
   $('#weatherZip').click(function () {
@@ -42,6 +59,7 @@ $(document).ready(function () {
 
       let request = new XMLHttpRequest();
       const url2 = `https://api.openweathermap.org/data/2.5/weather?q=${zipCode},us&appid=${process.env.API_KEY}&units=imperial`;
+
       request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
           const response = JSON.parse(this.responseText);
@@ -66,3 +84,9 @@ $(document).ready(function () {
     });
   });
 });
+
+// $('.showTemp').text(
+//   `The temperature in Fahrenheit is ${response.main.temp} degrees.`
+// );
+
+// else if (this.readyState)
