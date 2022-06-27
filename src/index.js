@@ -5,11 +5,13 @@ import './css/styles.css';
 
 $(document).ready(function () {
   $('#weatherLocation').click(function () {
-    const city = $('#location').val();
-    $('#location').val('');
+    const city = $('#city').val();
+    const state = $('#state').val();
+    $('#city').val('');
+    $('#state').val('');
 
     let request = new XMLHttpRequest();
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=${process.env.API_KEY}&units=imperial`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}, ${state}&appid=${process.env.API_KEY}&units=imperial`;
 
     request.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
