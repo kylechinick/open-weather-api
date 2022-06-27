@@ -6,10 +6,14 @@
     <div class="container">
       <h1>Get Weather Conditions From Anywhere!</h1>
       <label for="location">Enter a location:</label>
-      <input id="location" type="text" />
+      <input id="city" type="text" />
+      <input id="state" type="text" />
       <button class="btn-success" id="weatherLocation">
-        Get Current Temperature and Humidity
+        Get results via city name
       </button>
+      <label for="zip">Enter a zip code:</label>
+      <input id="zipCode" type="text" />
+      <button class="btn-success" id="weatherZip">Get results via zip</button>
       <div class="showErrors"></div>
       <div class="showHumidity"></div>
       <div class="showTemp"></div>
