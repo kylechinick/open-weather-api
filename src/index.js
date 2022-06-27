@@ -9,7 +9,7 @@ $(document).ready(function () {
     $('#location').val('');
 
     let request = new XMLHttpRequest();
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=${process.env.API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=${process.env.API_KEY}&units=imperial`;
 
     request.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
@@ -26,7 +26,10 @@ $(document).ready(function () {
         `The humidity in ${city} is ${response.main.humidity}%`
       );
       $('.showTemp').text(
-        `The temperature in Kelvins is ${response.main.temp} degrees.`
+        `The temperature in Fahrenheit is ${response.main.temp} degrees.`
+      );
+      $('.showClouds').text(
+        `the cloudiness in ${city} is  ${response.clouds.all}%`
       );
     }
   });
